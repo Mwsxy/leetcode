@@ -22,5 +22,6 @@ static const auto io_sync_off = []()
 
 int main() {
     auto res = Solution().xxx;
+    cout << res <<endl;
     return 0;
 }
