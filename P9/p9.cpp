@@ -21,9 +21,7 @@ bool check(string s) {
 class Solution {
 public:
     bool isPalindrome(int x) {
-        char buff[30];
-        sprintf(buff,"%d",x);
-        return check(string(buff));
+        return x<0?false:check(to_string(x));
     }
 };
 static const auto io_sync_off = []()
