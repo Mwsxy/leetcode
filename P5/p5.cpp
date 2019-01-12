@@ -7,8 +7,8 @@ using namespace std;
 
 
 bool check(string s) {
-    auto i=0;
-    auto j=s.size()-1;
+    int i=0;
+    int j=s.size()-1;
     while (s[i]==s[j]) {
         i++;
         j--;
