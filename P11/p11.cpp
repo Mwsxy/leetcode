@@ -10,11 +10,13 @@ public:
     int maxArea(vector<int>& height) {
         long long area;
         long long maxarea=0;
-        for (auto i=0;i<height.size();i++)
-            for (auto j=i+1;j<height.size();j++) {
-                area=(j-i)*min(height[i],height[j]);
-                if (area>maxarea) maxarea=area;
-            }
+        auto left=height.begin();
+        auto right=--height.end();
+        while (left<right) {
+            area = min(*left,*right)*(right-left);
+            if (area>maxarea) maxarea=area;
+            *left<*right?left++:right--;
+        }
         return maxarea;
         
     }
