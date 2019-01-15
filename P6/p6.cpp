@@ -10,6 +10,7 @@ public:
     string convert(string s, int numRows) {
         string res;
         int k;
+        if (numRows<=1) return s;
         for (auto i=0;i<numRows;i++) {
             for (auto t=0;t<s.size();t++) {
                 k=t%(2*(numRows-1));
