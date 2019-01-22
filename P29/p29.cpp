@@ -8,11 +8,17 @@ using namespace std;
 class Solution {
 public:
     int divide(int dividend, int divisor) {
+        if (dividend==0) return 0;
+        if (divisor==1) return dividend;
+
         bool negative=false;
         negative = (dividend ^ divisor) <0;
         unsigned int ans=0;
         unsigned int t=dividend>=0?dividend:~dividend+1;
         unsigned int d=divisor>=0?divisor:~divisor+1;
+        if (t<d) return 0;
+        if (d==1) ans=t;
+        else
         for (int i=31; i>=0;i--) {
             if ((t>>i)>=d) {
                 ans+=1<<i;
@@ -36,7 +42,7 @@ static const auto io_sync_off = []()
 
 
 int main() {
-    auto res = Solution().divide(7,-3);
+    auto res = Solution().divide(-2147483648,-2);
     cout << res <<endl;
     cout << "stop";
     return 0;
