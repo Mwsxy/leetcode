@@ -1,6 +1,7 @@
 # Custom config
 *~
 *.exe*
+/EXTRA
 # Prerequisites
 *.d
 
