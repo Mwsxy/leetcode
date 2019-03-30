@@ -41,6 +41,7 @@
         "xutility": "cpp",
         "string_view": "cpp",
         "deque": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "iomanip": "cpp"
     }
 }
