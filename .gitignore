@@ -1,4 +1,6 @@
 # Custom config
+*.bin
+*.ipch
 *~
 *.exe*
 /EXTRA
