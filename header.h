@@ -1,3 +1,4 @@
+#include <cstdint>
 #include<iostream>
 #include<vector>
 #include<string>
@@ -10,10 +11,31 @@
 using namespace std;
 
 struct TreeNode {
+public:
+
     int val;
     TreeNode *left;
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    void preorder(TreeNode *t) {
+            if (!t) return;
+            cout<< t->val << " ";
+            preorder(t->left);
+            preorder(t->right);
+    }
+    void inorder(TreeNode *t) {
+            if (!t) return;
+            inorder(t->left);
+            cout<< t->val << " ";
+            inorder(t->right);
+    }
+    void print_order() {
+        cout << "preorder: ";
+        preorder(this);
+        cout << endl;
+        cout << "inorder: ";
+        inorder(this);
+    }
 };
 
 struct ListNode {
