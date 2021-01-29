@@ -44,6 +44,17 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+struct Node {
+    int val;
+    Node* left;
+    Node* right;
+    Node* next;
+
+    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+    Node(int _val, Node* _left, Node* _right, Node* next)
+        : val(_val), left(_left), right(_right), next(_next) {}
+}
 static const auto io_sync_off = []()
 {
     // turn off sync
