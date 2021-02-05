@@ -1,35 +1,48 @@
 #include "header.h"
+#include <array>
+#include <cstdlib>
 
 #define N 10001
 
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        static int f[N][N];
-        memset(f, 0, sizeof(f));
-        for (size_t i = 0; i < s.size(); i++)
-        {
-            f[i][0] = 1;
-            if (i>0 && s[i]==s[i-1]) 
-                f[i][0] = f[i-1][0]+1;
-        }
-        for (size_t j=1; j<=k; j++) {
-            for (size_t i = 0; i < s.size(); i++) {
-                f[i][j] = max(f[i][j], f[i][j-1]);
-                if (i>0) {
-                    f[i][j] = max(f[i][j], f[i-1][j-1]+1);
-                    if (s[i]==s[i-1])
-                        f[i][j] = max(f[i][j], f[i-1][j]+1);
+        int head, tail, n;
+        array<bool, 26> letterSet;
+        letterSet.fill(false);
+        n = s.size();
+        for (int i=0; i<n; i++)
+            letterSet[s[i]-'A'] = true;
+        int maxDist = 0;
+        for (int t=0; t<26; t++) {
+            if (letterSet[t] == false) continue;
+            head = tail = 0;
+            int currTransfer = 0;
+            int dist = 0;
+            while (tail < n) {
+                if (head>tail) {
+                    tail=head;
+                    currTransfer = 0;
                 }
+                if (currTransfer+1 <= k) {
+                    if (s[tail]-'A' != t) currTransfer++;
+                    tail++;
+                }
+                else {
+                    if (s[tail]-'A' == t) {
+                        tail++;
+                    }
+                    else {
+                        if (s[head]-'A'!=t) currTransfer--;
+                        head++;
+                    }
+                }
+                if (tail-head > dist) dist = tail-head;
             }
+            maxDist = max(maxDist, dist);
         }
-        for (int j=0; j<=k; j++) {
-            for (size_t i = 0; i < s.size(); i++)
-                cout << f[i][j] << " ";
-            cout << endl;
-        }
-        cout << endl;
-        return 0.;
+        return maxDist;
+
     }
 };
 
@@ -37,6 +50,9 @@ int main(int argc, char const *argv[])
 {
     string s = "AAABBBABCAABVC";
     int k = 4;
-    cout << Solution().characterReplacement(s,k);
+    cout << Solution().characterReplacement(s,k) << endl;
+    cout << Solution().characterReplacement("ABAB",2) << endl;
+    cout << Solution().characterReplacement("AABABBA",1) << endl;
+    cout << Solution().characterReplacement("ABAA",0) << endl;
     return 0;
 }
