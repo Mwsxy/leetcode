@@ -1,42 +1,47 @@
 #include "header.h"
+#include <cstddef>
 #include <vector>
 
 class Solution {
 public:
-    int maxProfit_once(vector<int>& prices, int &mi, int &mj) {
-        int _min, ans =0;
-        int i=0;
+    int maxProfit(vector<int>& prices) {
+        array<int, 100001> max1, max2;
+        size_t _min, _max;
+        int ans;
         if (prices.empty()) return 0;
-        _min = 0;
-        while (i<prices.size()) {
+        _min = _max = 0;
+        ans = 0;
+        for (size_t i=0; i<prices.size(); i++) {
+            if (prices[i] < prices[_min]) {
+                _min = i;
+                _max = i;
+            }
+            if (prices[i] > prices[_max]) {
+                _max = i;
+            }
+            if (prices[_max] - prices[_min] > ans ) {
+                ans = prices[_max] - prices[_min];
+            }
+            max1[i] = ans;
+        }
+        int one_max = ans;
+        ans = 0;
+        _min = _max = prices.size()-1;
+        for (int i=prices.size()-1; i>=0; i--) {
+            if (prices[i] > prices[_max]) {
+                _max = i;
+                _min = i;
+            }
             if (prices[i] < prices[_min]) {
                 _min = i;
             }
-            int j=i;
-            while (j+1<prices.size() && prices[j+1]>prices[j]) j++;
-            if (prices[j]-prices[_min] > ans) {
-                ans = prices[j]-prices[_min];
-                mi = _min;
-                mj = j;
+            if (prices[_max] - prices[_min] > ans ) {
+                ans = prices[_max] - prices[_min];
             }
-            i=j+1;
+            max2[i] = ans;
         }
-        return ans;
-    }
-    int maxProfit(vector<int>& prices) {
-        int _max, _min, ans =0;
-        int i=0;
-        int mi, mj;
-        ans = maxProfit_once(prices, mi, mj);
-        if (ans >0) {
-            vector<int> sub1(prices.begin(), prices.begin()+mi);
-            vector<int> sub2(prices.begin()+mj+1, prices.end());
-            int t1,t2;
-            // cout << mi << " " << mj << endl;
-            t1 = maxProfit_once(sub1, mi, mj);
-            t2 = maxProfit_once(sub2, mi, mj);
-            ans += max(t1,t2);
-        }
+        for (size_t i=0; i<prices.size()-1; i++) 
+            ans = max(ans, max1[i]+max2[i+1]);
         return ans;
     }
 };
