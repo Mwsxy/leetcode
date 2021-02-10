@@ -1,3 +1,4 @@
+#include <array>
 #include <cstdint>
 #include<iostream>
 #include<vector>
@@ -66,3 +67,11 @@ static const auto io_sync_off = []()
     std::cin.tie(nullptr);
     return nullptr;
 }();
+
+template<typename T>
+void print(vector<T> a) {
+    for (const auto &v:a)
+        cout << v << " ";
+    cout << endl;
+    return;
+}
