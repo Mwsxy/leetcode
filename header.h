@@ -1,4 +1,5 @@
 #include <array>
+#include <bits/c++config.h>
 #include <cstdint>
 #include<iostream>
 #include<vector>
@@ -73,6 +74,14 @@ template<typename T>
 void print(vector<T> a) {
     for (const auto &v:a)
         cout << v << " ";
+    cout << endl;
+    return;
+}
+
+template<typename T>
+void print(T a[], size_t n) {
+    for (size_t i=0; i<n; i++) 
+        cout << a[i] << " ";
     cout << endl;
     return;
 }
