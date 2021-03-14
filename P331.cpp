@@ -16,26 +16,26 @@ class Solution {
 public:
     bool isValidSerialization(string preorder) {
         int i=0;
-        stack<int> id;
+        int id = 0;
         while (i<preorder.length())
         {
             int len, num, k;
             len = getNum(preorder, i, num);
             i+=len;
             if (len>0) {
-                id.push(num);
+                id++;
             }
             else {
                 i++;
-                if (!id.empty())
-                    id.pop();
+                if (id>0)
+                    id--;
                 else
                     break;
             }
             i += 1;
         }
         // printf("%d\n", i);
-        return i==preorder.length() && id.empty();
+        return i==preorder.length() && id==0;
     }
 };
 
